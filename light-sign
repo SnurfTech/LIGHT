@@ -1,0 +1,52 @@
+#!/bin/bash
+error() { echo "ERROR: $@" >&2; exit 1; }
+
+help() {
+	cat << EOF
+Usage: light-sign <REQUIRED OPTIONS>... [OPTIONS]...
+LIGHT stands for Logical Integrity Guarantee for Honest Transmission. LIGHT-sign generates one signature file.
+
+REQUIRED OPTIONS
+	-f, --file                Set the file to generate a signature from.
+
+OPTIONS
+
+	-k, --key                 Set the private key file to be used to generate the signature file. Default: ./key.pem. Eg. -k=awesome-key.pem
+	-o, --output              Set the name and path of the outputed signature file. Default: ./key.sig. Eg. -o=<file>.sig.
+EOF
+	exit 0
+}
+
+for i in "$@"; do
+	case "$i" in
+		-h|--help)
+			help
+			;;
+		-f=*|--file=*)
+			export FILE="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+		-k=*|--key=*)
+			export KEY="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+		-o=*|--output=*)
+			export OUTPUT="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+	esac
+done
+
+if [[ -z "$KEY" ]]; then
+	export KEY="key.pem"
+fi
+if [[ ! -e "$KEY" ]]; then
+	error "Key file could not be found."
+fi
+
+if [[ -z "$FILE" ]] || [[ ! -f "$FILE" ]]; then
+	error "File to generate signature from could not be found."
+fi
+
+if [[ -z "$OUTPUT" ]]; then
+	export OUTPUT="$FILE.sig"
+fi
+openssl dgst -sha256 -sign "$KEY" -out "$OUTPUT" "$FILE"
+echo "Signature generated."

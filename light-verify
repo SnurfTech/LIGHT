@@ -1,0 +1,60 @@
+#!/bin/bash
+error() { echo "ERROR: $@" >&2; exit 1; }
+
+help() {
+	cat << EOF
+Usage: light-verify <REQUIRED OPTIONS>... [OPTIONS]...
+LIGHT stands for Logical Integrity Guarantee for Honest Transmission. LIGHT-verify verifies one file with a signature.
+
+REQUIRED OPTIONS
+
+	-f, --file                Set the file to be verified.
+
+OPTIONS
+	-k, --key                 Set the public key file to be used to verify the original file. Default: ./key.pem. Eg. -k=awesome-key.pem
+	-s, --signature           Set the signature file to be used to verify the original file. Default: ./<file>.sig. Eg. -s=awesome-file.sig
+EOF
+	exit 0
+}
+
+for i in "$@"; do
+	case "$i" in
+		-h|--help)
+			help
+			;;
+		-f=*|--file=*)
+			export FILE="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+		-k=*|--key=*)
+			export KEY="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+		-s=*|--signature=*)
+			export SIG="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+	esac
+done
+
+if [[ -z "$KEY" ]]; then
+	export KEY="key.pub.pem"
+fi
+if [[ ! -e "$KEY" ]]; then
+	error "Key file could not be found."
+fi
+
+if [[ -z "$FILE" ]] || [[ ! -f "$FILE" ]]; then
+	error "File to verify could not be found."
+fi
+
+if [[ -z "$SIG" ]]; then
+	export SIG="${FILE}.sig"
+fi
+if [[ ! -e "$SIG" ]]; then
+	error "Signature file could not be found."
+fi
+
+if openssl dgst -sha256 -verify "$KEY" -signature "$SIG" "$FILE" >/dev/null 2>&1; then
+	echo "Signature is valid."
+else
+	echo "Signature is invalid."
+	exit 1
+fi

@@ -1,0 +1,30 @@
+#!/bin/bash
+help() {
+	cat << EOF
+Usage: light-genkey [OPTIONS]...
+LIGHT stands for Logical Integrity Guarantee for Honest Transmission. LIGHT-genkey generates two key files; key.pem and key.pub.pem.
+
+OPTIONS
+
+	-d, --directory             Set the output directory for the key files. Default: ./. Eg. -d=/path/to/dir.
+EOF
+	exit 0
+}
+
+for i in "$@"; do
+	case "$i" in
+		-h|--help)
+			help
+			;;
+		-d=*|--directory=*)
+			export OUTPUTDIR="$(echo "$i" | sed 's|^[^=]*=||g')"
+			;;
+	esac
+done
+
+if [[ -z "$OUTPUTDIR" ]]; then
+	export OUTPUTDIR="."
+fi
+openssl genpkey -algorithm RSA -out "$OUTPUTDIR/key.pem" -pkeyopt rsa_keygen_bits:2048
+openssl pkey -in "$OUTPUTDIR/key.pem" -pubout -out "$OUTPUTDIR/key.pub.pem"
+echo "Keys generated."
