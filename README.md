@@ -13,7 +13,7 @@ Usage: ```light-sign <FLAGS & OPTIONS>``` (I'm not putting much information on h
 Usage: ```light-verify <FLAGS & OPTIONS>``` (I'm not putting much information on how to use this command, as code can change and I'm too lazy to update this page a lot. For example, the help page. Run ```light-verify --help``` to actually view help and usage information.)
 
 ## How to Install (Automatically)
-Just use your Linux distribution's package manager! LIGHT may be there, or it may not. If it is not, see [How to Install (Manually)](#).
+Just use your Linux distribution's package manager! LIGHT may be there, or it may not. If it is not, see How to Install (Manually).
 
 ## How to Install (Manually)
 ### Dependencies
