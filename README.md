@@ -11,3 +11,21 @@ Usage: ```light-sign <FLAGS & OPTIONS>``` (I'm not putting much information on h
 
 ## LIGHT-verify
 Usage: ```light-verify <FLAGS & OPTIONS>``` (I'm not putting much information on how to use this command, as code can change and I'm too lazy to update this page a lot. For example, the help page. Run ```light-verify --help``` to actually view help and usage information.)
+
+## How to Install (Manually)
+### Dependencies
+> If for whatever reason you do not have Coreutils, BusyBox will also work.
+```
+openssl
+coreutils
+bash
+```
+> Bash is the interpreter for the scripts.
+ 
+> Coreutils is used for -- well -- running stuff like cat and [?
+
+> OpenSSL is used for generating keys, generating signatures, and verifing signatures.
+
+### Download the scripts and put them in a folder in your PATH environment variable
+```
+curl -L https
