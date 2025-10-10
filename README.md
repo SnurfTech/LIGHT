@@ -1,5 +1,5 @@
 # LIGHT
-LIGHT stands for Logical Integrity Guarantee for Honest Transmission. It allows you too generate a private and public key, use the private key to sign files, and use the public key to verify the signatures of the files.
+LIGHT stands for Logical Integrity Guarantee for Honest Transmission. It is like an alternative for GnuPG. It allows you too generate a private and public key, use the private key to sign files, and use the public key to verify the signatures of the files.
 
 There are three scripts -- one to generate keys, one to sign files, and one to verify those files with their signatures.
 
