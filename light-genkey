@@ -25,6 +25,6 @@ done
 if [[ -z "$OUTPUTDIR" ]]; then
 	export OUTPUTDIR="."
 fi
-openssl genpkey -algorithm RSA -out "$OUTPUTDIR/key.pem" -pkeyopt rsa_keygen_bits:2048
+openssl genpkey -algorithm RSA -out "$OUTPUTDIR/key.pem" -pkeyopt rsa_keygen_bits:4096
 openssl pkey -in "$OUTPUTDIR/key.pem" -pubout -out "$OUTPUTDIR/key.pub.pem"
 echo "Keys generated."
