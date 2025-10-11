@@ -36,9 +36,11 @@ curl
 ```
 mkdir -p ~/.local/bin
 curl -L https://github.com/SnurfTech/LIGHT/raw/refs/heads/main/light-genkey -o ~/.local/bin/light-genkey
+chmod +x ~/.local/bin/light-genkey
 curl -L https://github.com/SnurfTech/LIGHT/raw/refs/heads/main/light-sign -o ~/.local/bin/light-sign
+chmod +x ~/.local/bin/light-sign
 curl -L https://github.com/SnurfTech/LIGHT/raw/refs/heads/main/light-verify -o ~/.local/bin/light-verify
-chmod +x ~/.local/bin
+chmod +x ~/.local/bin/light-verify
 ```
 Now, add ```~/.local/bin``` to your PATH environment variable if it is not already there.
 ```
