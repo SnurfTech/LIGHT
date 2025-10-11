@@ -28,7 +28,7 @@ Usage: ```light-verify <FLAGS & OPTIONS>``` (I'm not putting much information on
 
 ## Installing (Manually)
 ### Dependencies
-> If for whatever reason you do not have Coreutils, BusyBox will also work.
+> If for whatever reason you can't use Coreutils, BusyBox will also work.
 ```
 openssl
 coreutils
