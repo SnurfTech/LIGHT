@@ -4,7 +4,7 @@ LIGHT stands for Logical Integrity Guarantee for Honest Transmission. It is like
 There are three scripts -- one to generate keys, one to sign files, and one to verify those files with their signatures.
 
 ## Table of Contents
-- [Usages](#usages)
+- [Usages & Help](#usages--help)
   - [LIGHT-genkey](#light-genkey)
   - [LIGHT-sign](#light-sign)
   - [LIGHT-verify](#light-verify)
@@ -16,7 +16,7 @@ There are three scripts -- one to generate keys, one to sign files, and one to v
   - [(OPTIONAL) Removing extra configurations](#optional-removing-extra-configurations)
   - [(OPTIONAL) Cleaning up](#optional-cleaning-up)
 
-## Usages
+## Usages & Help
 ### LIGHT-genkey
 Usage: ```light-genkey <FLAGS & OPTIONS>``` (I'm not putting much information on how to use this command, as code can change and I'm too lazy to update this page a lot. For example, the help page. Run ```light-genkey --help``` to actually view help and usage information.)
 
